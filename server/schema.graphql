@@ -1,0 +1,44 @@
+type Query {
+  jobs: [Job!]
+  job(id: ID!): Job
+  hello: String!
+  companies: [Company!]
+  company(id: ID!): Company
+}
+
+type Job {
+  id: ID!
+  title: String!
+  description: String
+  company: Company!
+}
+
+type Company {
+  id: ID!
+  name: String!
+  description: String
+}
+
+type Mutation {
+  addCompany(input:CreateCompanyInput): Company
+  deleteCompany(id: ID!): Company
+  createJob(input: CreateJobInput): Job
+  deleteJob(id: ID!): Job
+}
+
+input CreateCompanyInput{
+  name: String!
+  description: String!
+  companySize: Int
+}
+
+input CreateJobInput {
+  title: String!
+  description: String
+  companyId: ID!
+}
+
+type Subscription {
+  jobAdded: Job
+  companyAdded: Company
+}
